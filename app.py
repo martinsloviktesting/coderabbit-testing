@@ -1,24 +1,38 @@
 import streamlit as st
+from utils import get_app_version
 
-# Set page title
-st.set_page_config(page_title="Simple Streamlit App", page_icon="✨")
+st.set_page_config(
+    page_title="My Streamlit Template",
+    page_icon="✨",
+    layout="wide",
+    menu_items={
+        "Get Help": "https://docs.streamlit.io/",
+        "Report a bug": "https://github.com/streamlit/streamlit/issues",
+        "About": "A minimal multi-page app template."
+    }
+)
 
-# Title and description
-st.title("✨ My Simple Streamlit App")
-st.write("This is a minimal example to get you started with Streamlit.")
+# --- Sidebar (persistent across pages) ---
+with st.sidebar:
+    st.header("✨ App")
+    st.caption(f"Version: {get_app_version()}")
+    st.divider()
+    st.write("Use the menu at the top-left to switch pages.")
+    st.markdown(
+        """
+        **Quick links**
+        - 🏠 Home
+        - 📊 Data
+        - ⚙️ Settings
+        """
+    )
 
-# User input
-name = st.text_input("Enter your name:")
-number = st.slider("Pick a number", 1, 100, 25)
+st.title("✨ My Streamlit Template")
+st.write(
+    "Welcome! Use the **Pages** menu (top-left) to navigate. "
+    "This landing page is optional—feel free to keep content ultra-lean."
+)
 
-# Button action
-if st.button("Submit"):
-    st.success(f"Hello, {name or 'stranger'}! You picked {number} 🎉")
-
-# Show dataframe example
-import pandas as pd
-import numpy as np
-
-st.subheader("Random Data Example")
-df = pd.DataFrame(np.random.randn(10, 2), columns=["Column A", "Column B"])
-st.line_chart(df)
+st.info(
+    "Tip: Add global announcements here, or redirect users to a default page."
+)
